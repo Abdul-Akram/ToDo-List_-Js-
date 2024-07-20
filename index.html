@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body,
+        html {
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #74ebd5, #acb6e5);
+            color: #333;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 500px;
+        }
+
+        input[type="text"] {
+            padding: 0.75rem;
+            border-radius: 30px;
+            border: 1px solid #ccc;
+            width: calc(100% - 100px);
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+
+        .container h1 {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            margin-top: 1rem;
+            padding: 0;
+        }
+
+        ul li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 0.5rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        ul li:hover {
+            background-color: #f0f0f0;
+        }
+
+        ul li button {
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+            color: #fff;
+            background-color: #e74c3c;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        ul li button:hover {
+            background-color: #c0392b;
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .input-container #submit {
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            border: none;
+            background-color: #8e44ad;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .input-container #submit:hover {
+            background-color: #732d91;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>ToDo List</h1>
+        <div class="input-container">
+            <label for="inbox" style="display:none;">Add a new task</label>
+            <input id="inbox" type="text" name="todo" placeholder="Add a new task" required>
+            <button id="submit" onclick="additems()">Add</button>
+        </div>
+        <ul class="to-list">
+        </ul>
+    </div>
+    <script>
+        const list = document.querySelector('.to-list');
+
+        function additems() {
+            const value = document.getElementById("inbox").value;
+            if (value && !li_length()) {
+                let user_input = document.createElement("li");
+                user_input.innerHTML = `☑️ ${value} <button onclick="removeItem(this)">Remove</button>`;
+                list.appendChild(user_input);
+                document.getElementById("inbox").value = "";
+            }
+        }
+
+        function removeItem(button) {
+            const li = button.parentNode;
+            li.parentNode.removeChild(li);
+        }
+
+        function li_length() {
+            const li = document.querySelectorAll('li');
+            if (li.length >= 6) {
+                alert("List is full");
+                return true;
+            }
+            return false;
+        }
+    </script>
+</body>
+
+</html>
